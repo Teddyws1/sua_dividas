@@ -8,8 +8,7 @@
   const modalOverlay = document.getElementById("modal-overlay");
   const modalClose = document.getElementById("modal-close");
   const modalDetails = document.getElementById("modal-description");
-  const container = document.querySelector(".container");
-  const footer = document.querySelector("footer.footer");
+ 
 
   // Modal editar parcelas
   const modalEditInstallmentsOverlay = document.getElementById(
@@ -500,103 +499,3 @@ function getDragAfterElement(container, y) {
     { offset: Number.NEGATIVE_INFINITY }
   ).element;
 }
-//janela de aviso
-// Elementos
-const uaOpen = document.getElementById("uaOpen");
-const uaOverlay = document.getElementById("uaOverlay");
-const uaModal = document.getElementById("uaModal");
-const uaClose = document.getElementById("uaClose");
-
-let uaLastActive = null;
-
-// Foco ciclável dentro do modal
-function trapFocus(container, e) {
-  if (e.key !== "Tab") return;
-  const focusables = container.querySelectorAll(
-    'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
-  );
-  if (!focusables.length) return;
-
-  const first = focusables[0];
-  const last = focusables[focusables.length - 1];
-
-  if (e.shiftKey && document.activeElement === first) {
-    last.focus();
-    e.preventDefault();
-  } else if (!e.shiftKey && document.activeElement === last) {
-    first.focus();
-    e.preventDefault();
-  }
-}
-
-// Abrir
-function uaOpenModal() {
-  uaLastActive = document.activeElement;
-  uaOverlay.classList.add("is-open");
-  // animação do box
-  requestAnimationFrame(() => uaModal.classList.add("is-in"));
-  // trava scroll da página, se existir body
-  try {
-    document.body.style.overflow = "hidden";
-  } catch (e) {}
-  // foco inicial
-  setTimeout(() => uaClose.focus(), 10);
-
-  uaOverlay.addEventListener("keydown", onKeydown);
-}
-
-// Fechar
-function uaCloseModal() {
-  uaModal.classList.remove("is-in");
-  setTimeout(() => {
-    uaOverlay.classList.remove("is-open");
-    try {
-      document.body.style.overflow = "";
-    } catch (e) {}
-    if (uaLastActive) uaLastActive.focus();
-  }, 280);
-  uaOverlay.removeEventListener("keydown", onKeydown);
-}
-
-// Handlers
-function onKeydown(e) {
-  if (e.key === "Escape") {
-    uaCloseModal();
-    return;
-  }
-  trapFocus(uaModal, e);
-}
-
-// Eventos
-uaOpen.addEventListener("click", uaOpenModal);
-uaClose.addEventListener("click", uaCloseModal);
-uaOverlay.addEventListener("click", (e) => {
-  if (e.target === uaOverlay) uaCloseModal(); // clique fora fecha
-});
-// cursor personalizando
-const clickCursor = document.getElementById("click-cursor");
-
-document.addEventListener("mousedown", (e) => {
-  // Posicionar o cursor animado onde clicou
-  clickCursor.style.left = e.clientX + "px";
-  clickCursor.style.top = e.clientY + "px";
-
-  // Ativar a animação
-  clickCursor.classList.add("active");
-
-  // Remover a classe depois da animação
-  setTimeout(() => clickCursor.classList.remove("active"), 300);
-});
-
-const tabButtons = document.querySelectorAll(".tab-btn");
-const tabContents = document.querySelectorAll(".tab-content");
-
-tabButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const target = button.dataset.tab;
-
-    tabContents.forEach((tab) => {
-      tab.style.display = tab.id === target ? "block" : "none";
-    });
-  });
-});
