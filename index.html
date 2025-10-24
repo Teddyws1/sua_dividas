@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sistema Controle de Dívidas com Parcelas Pagas</title>
-<link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
   <!-- Fonte Google -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
 </head>
 
 <body data-theme="light">
@@ -24,12 +24,12 @@
     </header>
 
     <nav class="tabs" role="tablist" aria-label="Abas do sistema">
-      <button role="tab" aria-selected="true" aria-controls="tab-control" id="tab-control-btn"
-        class="active">Controle</button>
-      <button role="tab" aria-selected="false" aria-controls="tab-calculator" id="tab-calculator-btn">anotação</button>
+      <button role="tab" aria-selected="true" aria-controls="tab-control" id="tab-control-btn" class="active">Controle</button>
+      <button role="tab" aria-selected="false" aria-controls="tab-calculator" id="tab-calculator-btn">Anotação</button>
       <button role="tab" aria-selected="false" aria-controls="tab-history" id="tab-history-btn">Histórico</button>
     </nav>
 
+    <!-- Aba Controle -->
     <section id="tab-control" class="tab-content card" role="tabpanel" aria-labelledby="tab-control-btn">
       <form id="debt-form" novalidate>
         <label for="creditor-type">Tipo do Credor:</label>
@@ -41,14 +41,11 @@
         <span id="creditor-type-desc" class="sr-only">Escolha o tipo de credor</span>
 
         <label for="company-name">Nome da Empresa / Pessoa:</label>
-        <input type="text" id="company-name" placeholder="Digite o nome" required aria-required="true"
-          autocomplete="off" />
+        <input type="text" id="company-name" placeholder="Digite o nome" required aria-required="true" autocomplete="off" />
 
         <label for="debt-description">Descrição da Dívida:</label>
-        <textarea id="debt-description" rows="3" placeholder="Detalhe a dívida" required
-          aria-required="true"></textarea>
+        <textarea id="debt-description" rows="3" placeholder="Detalhe a dívida" required aria-required="true"></textarea>
 
-        <!-------Forma de pagamento------>
         <label for="debt-value">Valor da Dívida (R$):</label>
         <input type="number" id="debt-value" placeholder="0.00" min="0.01" step="0.01" required aria-required="true" />
 
@@ -59,27 +56,26 @@
           <option value="Dinheiro">&#x1F4B5;Dinheiro</option>
           <option value="Cartão de crédito">&#x1F4B3;Cartão de crédito</option>
           <option value="Cartão de débito">&#x1F4B3;Cartão de débito</option>
-          <option value="Cartão de crédito">&#x1F4B3;&#x1F4C5;Cartão de crédito parcelado</option>
-          <option value="Cartão de débito">&#x1F4B3;&#x1F4C5;Cartão de débito parcelado</option>
+          <option value="Cartão de crédito parcelado">&#x1F4B3;&#x1F4C5;Cartão de crédito parcelado</option>
+          <option value="Cartão de débito parcelado">&#x1F4B3;&#x1F4C5;Cartão de débito parcelado</option>
           <option value="Pix">&#x26A1;Pix</option>
           <option value="pix/parcelado">&#128176;&#9889;pix/parcelado</option>
           <option value="Cheque">&#x270D;&#xFE0F;Cheque</option>
-          <option value="Boleto"> &#x1F4C4;Boleto</option>
+          <option value="Boleto">&#x1F4C4;Boleto</option>
         </select>
-
         <span id="payment-method-desc" class="sr-only">Escolha a forma de pagamento</span>
+
         <label for="debt-type">Tipo da Dívida:</label>
         <select id="debt-type" required aria-required="true" aria-describedby="debt-type-desc">
           <option value="" disabled selected>Selecione...</option>
           <option value="Cartão">&#x1F4B3;Cartão</option>
-          <option value="Empréstimo">&#x1F4B0;empréstimo</option>
+          <option value="Empréstimo">&#x1F4B0;Empréstimo</option>
           <option value="Cheque">&#x270D;&#xFE0F;Cheque</option>
           <option value="Financiamento de veículo">&#x1F697;Financiamento de veículo</option>
-          <option value="Cartão de débito parcelado	">&#x1F4B3;&#x1F4C5;Cartão de débito parcelado</option>
+          <option value="Cartão de débito parcelado">&#x1F4B3;&#x1F4C5;Cartão de débito parcelado</option>
           <option value="Empréstimo pessoal">&#x1F4B0;Empréstimo pessoal</option>
           <option value="Empréstimo consignado">&#x1F3E6;Empréstimo consignado</option>
-          <option value="Impostos atrasados (IPTU, ISS, ICMS, IR etc.)">&#x1F3DB;&#xFE0F;Impostos atrasados (IPTU, ISS,
-            ICMS, IR etc.)</option>
+          <option value="Impostos atrasados">&#x1F3DB;&#xFE0F;Impostos atrasados (IPTU, ISS, ICMS, IR etc.)</option>
           <option value="Multas e penalidades">&#x26A0;&#xFE0F;Multas e penalidades</option>
           <option value="Conta de luz">&#x1F4A1;Conta de luz</option>
           <option value="Conta de água">&#x1F4A7;Conta de água</option>
@@ -111,16 +107,16 @@
         <button type="submit" class="submit-btn" aria-label="Adicionar dívida">Adicionar Dívida</button>
       </form>
     </section>
-    <!-------anotação--------->
+
+    <!-- Aba Anotação -->
     <section id="tab-calculator" class="tab-content card" hidden role="tabpanel" aria-labelledby="tab-calculator-btn">
-      <p>
       <div id="note-app">
         <button id="add-note">Adicionar Nota</button>
         <div id="notes-container" class="notes-grid"></div>
       </div>
-      </p>
     </section>
 
+    <!-- Aba Histórico -->
     <section id="tab-history" class="tab-content card" hidden role="tabpanel" aria-labelledby="tab-history-btn">
       <table aria-describedby="history-desc" role="grid">
         <caption id="history-desc" class="sr-only">Histórico de dívidas adicionadas</caption>
@@ -140,7 +136,7 @@
     </section>
   </div>
 
-  <!-- Modal Detalhes dividas -->
+  <!-- Modais -->
   <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title"
     aria-describedby="modal-description" tabindex="-1">
     <div class="modal" role="document">
@@ -150,9 +146,8 @@
     </div>
   </div>
 
-  <!-- Modal Editar Parcelas -->
-  <div class="modal-overlay" id="modal-edit-installments-overlay" role="dialog" aria-modal="true"
-    aria-labelledby="edit-installments-title" tabindex="-1" style="display:none;">
+  <div class="modal-overlay hidden" id="modal-edit-installments-overlay" role="dialog" aria-modal="true"
+    aria-labelledby="edit-installments-title" tabindex="-1">
     <div class="modal" role="document">
       <h3 id="edit-installments-title">Editar Parcelas Pagas</h3>
       <button class="close-btn" id="modal-edit-installments-close" aria-label="Fechar modal">&times;</button>
@@ -164,63 +159,33 @@
   <footer class="footer" role="contentinfo">
     <div class="footer-container">
       <div class="footer-about">
-        
-        <!-----cursor personalizando--------->
         <div id="click-cursor"></div>
-
-        <!--------animação do icone de download-------->
         <h5>Política de Privacidade e Termos de Uso</h5>
-        <abbr title="Política de Privacidade e Termos de Uso"><button id="start-download">Download</button></abbr>
-        <button id="stop-download">Cancelar</button>
+        <button id="start-download" class="download-btn">Download</button>
+        <button id="stop-download" class="cancel-btn">Cancelar</button>
         <div id="progress-container">
           <div id="progress-bar"></div>
           <span id="progress-text">0%</span>
-          <a id="download-link" href="teste.txt" download style="display:none;">Download</a>
         </div>
-
-        <script src="script.js"></script>
-
-
-        <script src="script.js"></script>
-
-        <a id="download-link" href="Política de Privacidade e Termos de Uso.zip" download="application/zip"
-          style="display:none;"></a>
-
-
-        <!------ICONES E LINKS DE REDE SOCIAL------>
-      </div>
+        
       <div class="footer-social">
         <h3>Siga-nos</h3>
         <div class="social-icons">
-          <!------instagram------>
-          <a href="https://www.instagram.com/teddy_machado007?igsh=MmtjdTF4ZGlqdjVl" aria-label="instagram Systems"
-            target="_blank" rel="noopener">
-            <abbr title="segui nós no instagram ">
-              <img src="https://icons.iconarchive.com/icons/colebemis/feather/32/instagram-icon.png" width="32"
-                height="32" width="32" height="32" alt="instagram" />
-            </abbr>
+          <a href="https://www.instagram.com/teddy_machado007?igsh=MmtjdTF4ZGlqdjVl" aria-label="Instagram" target="_blank" rel="noopener">
+            <img src="https://icons.iconarchive.com/icons/colebemis/feather/32/instagram-icon.png" alt="instagram" />
           </a>
-          <!------tiktok------>
-          <a href="https://www.tiktok.com/@teddy_machado007?_t=ZM-8yk5UDbdWHY&_r=1" aria-label="tiktok Wagner"
-            target="_blank" rel="noopener">
-            <abbr title="segui nós no tiktok">
-              <img src="https://icons.iconarchive.com/icons/aniket-suvarna/box-logo/32/bxl-tiktok-icon.png" width="32"
-                height="32" width="32" height="32" alt="tiktok" />
-            </abbr>
+          <a href="https://www.tiktok.com/@teddy_machado007?_t=ZM-8yk5UDbdWHY&_r=1" aria-label="TikTok" target="_blank" rel="noopener">
+            <img src="https://icons.iconarchive.com/icons/aniket-suvarna/box-logo/32/bxl-tiktok-icon.png" alt="tiktok" />
           </a>
-          <!----youtube---->
-          <a href="https://youtube.com/@teddy_machado007?si=W5UT1Tu4YDqOQs7Z" aria-label="youtube teddy" target="_blank"
-            rel="noopener">
-            <abbr title="videos completo dos sistemas">
-              <img src="https://icons.iconarchive.com/icons/simpleicons-team/simple/32/youtube-icon.png" width="32"
-                height="32" width="32" height="32" width="32" height="32" alt="youtube" />
-            </abbr>
+          <a href="https://youtube.com/@teddy_machado007?si=W5UT1Tu4YDqOQs7Z" aria-label="YouTube" target="_blank" rel="noopener">
+            <img src="https://icons.iconarchive.com/icons/simpleicons-team/simple/32/youtube-icon.png" alt="youtube" />
           </a>
-
-
-          <p>®Desenvolvido Por Teddy machado todos os direitos reservados 2025</p>
         </div>
+        <p>®Desenvolvido Por Teddy Machado. Todos os direitos reservados 2025</p>
+      </div>
+    </div>
   </footer>
+
   <script src="script.js" defer></script>
 </body>
 
